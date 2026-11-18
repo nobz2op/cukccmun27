@@ -135,6 +135,7 @@ function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixPr
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLUListElement>(null)
   const offsetRef = useRef(0)
+  const setWidthRef = useRef(0)
   const recenterRef = useRef<{ start: number; target: number; startedAt: number | null } | null>(
     null,
   )
@@ -217,6 +218,8 @@ function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixPr
       const nextWidth = nextSetRect.left - firstRect.left
       if (nextWidth <= 0) return
 
+      const previousWidth = setWidthRef.current
+
       if (!initializedRef.current) {
         const centeredOffset =
           style === 'character'
@@ -225,9 +228,11 @@ function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixPr
         offsetRef.current =
           nextSetRect.left - viewportRect.left - centeredOffset
         initializedRef.current = true
-      } else if (setWidth > 0) {
-        offsetRef.current = (offsetRef.current / setWidth) * nextWidth
+      } else if (previousWidth > 0) {
+        offsetRef.current = (offsetRef.current / previousWidth) * nextWidth
       }
+
+      setWidthRef.current = nextWidth
 
       setSetWidth((current) => (current === nextWidth ? current : nextWidth))
       track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`
@@ -238,7 +243,7 @@ function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixPr
     observer.observe(viewport)
     observer.observe(track)
     return () => observer.disconnect()
-  }, [portfolioCount, setWidth, style])
+  }, [portfolioCount, style])
 
   useEffect(() => {
     if (
