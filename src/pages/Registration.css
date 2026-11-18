@@ -1,0 +1,296 @@
+.registration-page {
+  min-height: 55vh;
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+  color: var(--color-main-text);
+}
+
+.registration-container {
+  width: min(60rem, calc(100% - 3rem));
+  margin-inline: auto;
+}
+
+.registration-heading {
+  margin: 0 auto clamp(2rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.registration-heading h1 {
+  margin: 0;
+  color: var(--color-champagne-gold);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+.registration-heading p {
+  margin: 1rem 0 0;
+  color: var(--color-muted-text);
+  line-height: 1.7;
+}
+
+.registration-options {
+  display: grid;
+  gap: 1rem;
+}
+
+.registration-card {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--color-champagne-gold) 28%, transparent);
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--color-black) 38%, transparent);
+  transition:
+    transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    background-color 300ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .registration-card:not(.registration-card--expanded):hover {
+    z-index: 2;
+    transform: translateY(-5px) scale(1.04);
+    border-color: var(--color-champagne-gold);
+    background: color-mix(in srgb, var(--color-crimson) 18%, var(--color-black));
+    box-shadow:
+      0 0.9rem 2rem rgb(0 0 0 / 45%),
+      0 0 1.75rem color-mix(in srgb, var(--color-champagne-gold) 32%, transparent);
+  }
+}
+
+.registration-card--expanded {
+  z-index: 1;
+  border-color: var(--color-champagne-gold);
+  background: color-mix(in srgb, var(--color-crimson) 14%, var(--color-black));
+  box-shadow:
+    0 0.75rem 1.75rem rgb(0 0 0 / 40%),
+    0 0 1.5rem color-mix(in srgb, var(--color-champagne-gold) 28%, transparent);
+}
+
+.registration-card__heading {
+  margin: 0;
+}
+
+.registration-card__toggle {
+  display: flex;
+  width: 100%;
+  min-height: 4.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.35rem;
+  border: 0;
+  background: var(--fabric-panel);
+  color: var(--color-champagne-gold);
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1rem, 2.6vw, 1.35rem);
+  font-weight: 600;
+  text-align: left;
+}
+
+.registration-card__toggle:hover {
+  color: var(--color-main-text);
+}
+
+.registration-card__toggle:focus-visible,
+.registration-form__retry:focus-visible {
+  outline: 2px solid var(--color-main-text);
+  outline-offset: -4px;
+}
+
+.registration-card__indicator {
+  flex: 0 0 auto;
+  color: var(--color-gold-accent);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .registration-card:not(.registration-card--expanded):hover .registration-card__indicator {
+    transform: rotate(90deg) scale(1.2);
+  }
+}
+
+.registration-card--expanded .registration-card__indicator {
+  transform: scale(1.15);
+}
+
+.registration-card__panel {
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  animation: registration-panel-in 350ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes registration-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.registration-card__panel-header {
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: calc(-1 * clamp(0.75rem, 2vw, 1.25rem)) calc(-1 * clamp(0.75rem, 2vw, 1.25rem)) 0.75rem;
+  padding: 0.6rem clamp(0.75rem, 2vw, 1.25rem);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-champagne-gold) 32%, transparent);
+  background:
+    radial-gradient(ellipse 80% 120% at 0% 0%, rgb(143 8 13 / 55%) 0%, transparent 65%),
+    linear-gradient(120deg, var(--color-dark-red), var(--color-black) 130%);
+}
+
+.registration-card__panel-title {
+  color: var(--color-champagne-gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.registration-card__close {
+  display: inline-flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--color-champagne-gold) 55%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-black) 45%, transparent);
+  color: var(--color-champagne-gold);
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.registration-card__close:hover {
+  border-color: var(--color-champagne-gold);
+  background: var(--color-crimson);
+  color: var(--color-main-text);
+  box-shadow: 0 0 0.9rem color-mix(in srgb, var(--color-champagne-gold) 40%, transparent);
+  transform: rotate(90deg) scale(1.08);
+}
+
+.registration-card__close:active {
+  transform: rotate(90deg) scale(0.96);
+}
+
+.registration-card__close:focus-visible {
+  outline: 2px solid var(--color-main-text);
+  outline-offset: 2px;
+}
+
+.registration-form {
+  min-width: 0;
+}
+
+.registration-form__iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+  background: #fff;
+}
+
+.registration-form__iframe--tally {
+  height: auto;
+}
+
+.registration-form__status,
+.registration-form__fallback {
+  display: flex;
+  min-height: 5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem;
+  color: var(--color-muted-text);
+  text-align: center;
+}
+
+.registration-form__fallback {
+  flex-direction: column;
+}
+
+.registration-form__fallback p {
+  margin: 0;
+}
+
+.registration-form__spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  border: 2px solid color-mix(in srgb, var(--color-champagne-gold) 35%, transparent);
+  border-top-color: var(--color-champagne-gold);
+  border-radius: 50%;
+  animation: registration-spin 800ms linear infinite;
+}
+
+.registration-form__retry {
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--color-champagne-gold);
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--color-champagne-gold);
+  cursor: pointer;
+}
+
+.registration-form__retry:hover {
+  background-color: color-mix(in srgb, var(--color-champagne-gold) 12%, transparent);
+}
+
+@keyframes registration-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 520px) {
+  .registration-container {
+    width: min(100% - 2rem, 60rem);
+  }
+
+  .registration-card__toggle {
+    padding-inline: 1rem;
+  }
+
+  .registration-form__iframe {
+    width: 100%;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .registration-form__spinner {
+    animation: none;
+  }
+
+  .registration-card,
+  .registration-card__indicator,
+  .registration-card__close {
+    transition-duration: 0.01ms;
+  }
+
+  .registration-card__panel {
+    animation: none;
+  }
+}

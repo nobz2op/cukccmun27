@@ -1,0 +1,115 @@
+.site-footer {
+  padding: 2.75rem 1.5rem;
+  background: var(--fabric-panel);
+  border-top: 1px solid rgb(245 223 170 / 24%);
+  color: var(--color-muted-text);
+}
+
+.site-footer__content {
+  display: grid;
+  max-width: 76rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(10rem, 0.8fr) minmax(9rem, 0.7fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  margin: 0 auto;
+}
+
+.site-footer__section h2 {
+  margin: 0 0 1rem;
+  color: var(--color-champagne-gold);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-footer__section address,
+.site-footer__section ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  font-style: normal;
+  list-style: none;
+}
+
+.site-footer__section a {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  color: var(--color-muted-text);
+  overflow-wrap: anywhere;
+  transition: color 180ms ease;
+}
+
+.site-footer__section a::after {
+  position: absolute;
+  right: 0;
+  bottom: -0.12rem;
+  left: 0;
+  height: 1px;
+  background-color: var(--color-gold-accent);
+  content: '';
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+.site-footer__section a:hover,
+.site-footer__section a:focus-visible {
+  color: var(--color-champagne-gold);
+}
+
+.site-footer__section a:hover::after,
+.site-footer__section a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.site-footer__section a:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-champagne-gold) 80%, transparent);
+  outline-offset: 4px;
+}
+
+.site-footer__instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.site-footer__instagram span {
+  color: var(--color-gold-accent);
+  font-size: 1.15rem;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.site-footer__instagram:hover span,
+.site-footer__instagram:focus-visible span {
+  color: var(--color-champagne-gold);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 720px) {
+  .site-footer__content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    padding: 2.25rem 1.25rem;
+  }
+
+  .site-footer__content {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__section a,
+  .site-footer__section a::after,
+  .site-footer__instagram span {
+    transition: none;
+  }
+}

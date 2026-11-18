@@ -1,0 +1,73 @@
+.shimmer-letter {
+  display: inline-block;
+  background-image: linear-gradient(
+    105deg,
+    var(--color-champagne-gold) 0%,
+    var(--color-champagne-gold) 38%,
+    #fff6dd 50%,
+    var(--color-champagne-gold) 62%,
+    var(--color-champagne-gold) 100%
+  );
+  background-position: 100% 0;
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation:
+    shimmer-letter-enter 700ms cubic-bezier(0.2, 0.7, 0.25, 1) both,
+    shimmer-letter-sweep 8s linear infinite;
+  animation-delay:
+    calc(var(--letter-index, 0) * 42ms),
+    calc(var(--letter-index, 0) * -0.5s);
+}
+
+.shimmer-title--hero .shimmer-letter {
+  animation:
+    shimmer-letter-sweep 9s linear infinite,
+    shimmer-letter-wave 6s ease-in-out infinite;
+  animation-delay:
+    calc(var(--letter-index, 0) * -0.55s),
+    calc(var(--letter-index, 0) * 0.32s);
+}
+
+@keyframes shimmer-letter-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes shimmer-letter-sweep {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: 0% 0;
+  }
+}
+
+@keyframes shimmer-letter-wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-0.05em);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-letter,
+  .shimmer-title--hero .shimmer-letter {
+    animation: none;
+  }
+}

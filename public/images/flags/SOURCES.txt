@@ -1,0 +1,23 @@
+Country flags and the European Union flag are copied from flag-icons 7.6.0,
+flags/4x3, under the package's MIT license. ISO alpha-2 codes are recorded in
+src/data/committees.ts.
+
+The ASEAN flag is copied from flag-icons 7.6.0, flags/4x3/asean.svg, under the
+package's MIT license.
+
+The African Union flag is from Wikimedia Commons, "Flag of the African Union":
+https://commons.wikimedia.org/wiki/File:Flag_of_the_African_Union.svg
+The Commons file credits the official African Union source and marks the flag
+public domain.
+
+The League of Arab States flag is from Wikimedia Commons, "Flag of the Arab
+League":
+https://commons.wikimedia.org/wiki/File:Flag_of_the_Arab_League.svg
+The Commons file marks the flag public domain.
+
+The Organization of American States flag/emblem is from Wikimedia Commons,
+"Flag of the Organization of American States":
+https://commons.wikimedia.org/wiki/File:Flag_of_the_Organization_of_American_States.svg
+Author: Sodacan. License: CC BY-SA 4.0. The local SVG was copied from the
+OpenFrontIO flag collection, which embeds the Commons flag artwork:
+https://raw.githubusercontent.com/openfrontio/OpenFrontIO/main/resources/flags/Organization%20of%20American%20States.svg

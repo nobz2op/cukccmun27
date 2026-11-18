@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Inter', sans-serif;
+  color: #fff5e6;
+  background-color: #180304;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-crimson: #8f080d;
+  --color-dark-red: #650609;
+  --color-black: #180304;
+  --color-dark-card: #3b0508;
+  --color-red-highlight: #8f080d;
+  --color-champagne-gold: #f5dfa3;
+  --color-gold-accent: #d6a83f;
+  --color-main-text: #fff5e4;
+  --color-muted-text: #e8d8c2;
+  --fabric-flow:
+    radial-gradient(ellipse 95% 48% at 14% 12%, rgb(143 8 13 / 76%) 0%, rgb(101 6 9 / 44%) 45%, transparent 78%),
+    radial-gradient(ellipse 82% 40% at 82% 33%, rgb(143 8 13 / 62%) 0%, transparent 74%),
+    radial-gradient(ellipse 110% 30% at 50% 58%, rgb(24 3 4 / 72%) 0%, transparent 72%),
+    radial-gradient(ellipse 90% 44% at 24% 85%, rgb(101 6 9 / 62%) 0%, transparent 76%),
+    radial-gradient(ellipse 80% 28% at 92% 100%, rgb(143 8 13 / 42%) 0%, transparent 78%),
+    linear-gradient(168deg, transparent 12%, rgb(24 3 4 / 32%) 32%, transparent 47%, rgb(143 8 13 / 30%) 68%, transparent 85%),
+    linear-gradient(125deg, #650609 0%, #8f080d 35%, #650609 67%, #180304 84%, #8f080d 100%);
+  --fabric-panel:
+    radial-gradient(ellipse 120% 110% at 52% 0%, rgb(143 8 13 / 66%) 0%, rgb(101 6 9 / 42%) 48%, transparent 82%),
+    linear-gradient(110deg, #3b0508 0%, #650609 48%, #3b0508 100%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--color-dark-red);
+  background-image: var(--fabric-flow);
+  background-position: center top;
+  background-repeat: no-repeat;
+  color: var(--color-main-text);
+  font-family: 'Inter', sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-champagne-gold);
+  font-family: 'Cinzel', serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+a {
+  color: var(--color-gold-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-champagne-gold);
+}
+
+button {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.foundation {
+  display: grid;
+  min-height: 55vh;
+  align-content: center;
+  justify-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.foundation h1 {
+  margin: 0 0 1rem;
+  color: var(--color-champagne-gold);
+  font-size: clamp(2rem, 6vw, 4rem);
+}
+
+.foundation__motto {
+  margin: 0;
+  color: var(--color-gold-accent);
+  font-family: 'Cinzel', serif;
+}
+
+.foundation__status {
+  margin: 1.5rem 0 0;
+  color: var(--color-muted-text);
+}

@@ -1,0 +1,199 @@
+.gold-dust {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gold-dust--ambient {
+  position: fixed;
+  z-index: -1;
+}
+
+.gold-dust__glow {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-gold-accent) 16%, transparent) 0%,
+    color-mix(in srgb, var(--color-crimson) 12%, transparent) 45%,
+    transparent 70%
+  );
+  filter: blur(28px);
+  opacity: var(--o, 0.4);
+  animation: gold-glow-drift var(--d, 26s) ease-in-out var(--dl, 0s) infinite alternate;
+}
+
+.gold-dust__particle {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #fff6dd 0%,
+    var(--color-champagne-gold) 45%,
+    transparent 75%
+  );
+  box-shadow: 0 0 8px color-mix(in srgb, var(--color-gold-accent) 65%, transparent);
+  opacity: 0;
+  animation: gold-particle-rise var(--d, 12s) linear var(--dl, 0s) infinite;
+}
+
+.gold-dust__speck {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: var(--color-champagne-gold);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--color-gold-accent) 80%, transparent);
+  opacity: 0;
+  animation: gold-speck-drift var(--d, 10s) ease-in-out var(--dl, 0s) infinite;
+}
+
+.gold-dust__shape {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border: 1px solid color-mix(in srgb, var(--color-champagne-gold) 38%, transparent);
+  opacity: 0;
+  animation: gold-shape-float var(--d, 16s) ease-in-out var(--dl, 0s) infinite;
+}
+
+.gold-dust__shape--diamond {
+  rotate: 45deg;
+}
+
+.gold-dust__shape--ring {
+  border-radius: 50%;
+}
+
+.gold-dust__beam {
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: 0;
+  width: 32%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-champagne-gold) 6%, transparent) 30%,
+    color-mix(in srgb, var(--color-champagne-gold) 16%, transparent) 48%,
+    color-mix(in srgb, #fff6dd 22%, transparent) 50%,
+    color-mix(in srgb, var(--color-champagne-gold) 16%, transparent) 52%,
+    color-mix(in srgb, var(--color-champagne-gold) 6%, transparent) 70%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateX(-120%) skewX(-14deg);
+  animation: gold-beam-travel 17s ease-in-out -4s infinite;
+}
+
+@keyframes gold-particle-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.6);
+  }
+
+  18% {
+    opacity: var(--o, 0.65);
+  }
+
+  75% {
+    opacity: var(--o, 0.65);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--sway, 24px), -150px, 0) scale(1);
+  }
+}
+
+@keyframes gold-speck-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    opacity: var(--o, 0.8);
+  }
+
+  75% {
+    opacity: var(--o, 0.8);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--dx, 30px), var(--dy, -30px), 0);
+  }
+}
+
+@keyframes gold-shape-float {
+  0% {
+    opacity: 0;
+    translate: 0 10px;
+  }
+
+  20% {
+    opacity: var(--o, 0.45);
+  }
+
+  80% {
+    opacity: var(--o, 0.45);
+  }
+
+  100% {
+    opacity: 0;
+    translate: var(--dx, 20px) var(--dy, -50px);
+  }
+}
+
+@keyframes gold-glow-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(var(--mx, 60px), var(--my, -40px), 0) scale(1.12);
+  }
+}
+
+@keyframes gold-beam-travel {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%) skewX(-14deg);
+  }
+
+  10% {
+    opacity: 0.85;
+  }
+
+  55% {
+    opacity: 0.85;
+    transform: translateX(340%) skewX(-14deg);
+  }
+
+  65%,
+  100% {
+    opacity: 0;
+    transform: translateX(340%) skewX(-14deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gold-dust {
+    display: none;
+  }
+}
