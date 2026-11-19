@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { committees } from '../data/committees'
 import { registrationForms } from '../data/registration'
 import type { RegistrationForm } from '../data/registration'
+import PortfolioMatrix from '../components/committees/PortfolioMatrix'
+import './Committees.css'
 import './Registration.css'
 
 declare global {
@@ -13,6 +16,11 @@ declare global {
 }
 
 const tallyScriptUrl = 'https://tally.so/widgets/embed.js'
+
+const portfolioSections = [
+  { id: 'portfolio-unga', committeeSlug: 'unga' },
+  { id: 'portfolio-wls', committeeSlug: 'world-leaders-summit' },
+] as const
 let tallyScriptPromise: Promise<void> | null = null
 
 function loadTallyScript() {
@@ -128,6 +136,9 @@ function EmbeddedForm({ form }: { form: RegistrationForm }) {
 }
 
 function Registration() {
+  const [expandedPortfolios, setExpandedPortfolios] = useState<
+    Record<string, boolean>
+  >({})
   const [searchParams] = useSearchParams()
   const requestedFormId = searchParams.get('form')
   const [expandedForms, setExpandedForms] = useState<Record<string, boolean>>(
@@ -157,6 +168,13 @@ function Registration() {
     setExpandedForms((currentForms) => ({
       ...currentForms,
       [formId]: !currentForms[formId],
+    }))
+  }
+
+  const togglePortfolio = (sectionId: string) => {
+    setExpandedPortfolios((currentSections) => ({
+      ...currentSections,
+      [sectionId]: !currentSections[sectionId],
     }))
   }
 
@@ -219,6 +237,71 @@ function Registration() {
               </article>
             )
           })}
+        </section>
+
+        <section
+          className="registration-portfolios"
+          aria-labelledby="registration-portfolios-title"
+        >
+          <h2
+            className="registration-portfolios__title"
+            id="registration-portfolios-title"
+          >
+            Explore Portfolios
+          </h2>
+          <div className="registration-options">
+            {portfolioSections.map(({ id, committeeSlug }) => {
+              const committee = committees.find(
+                (item) => item.slug === committeeSlug,
+              )
+              if (!committee?.portfolios || !committee.portfolioStyle) {
+                return null
+              }
+
+              const isExpanded = Boolean(expandedPortfolios[id])
+              const panelId = `${id}-panel`
+
+              return (
+                <article
+                  className={`registration-card${isExpanded ? ' registration-card--expanded' : ''}`}
+                  key={id}
+                >
+                  <h2 className="registration-card__heading">
+                    <button
+                      className="registration-card__toggle"
+                      type="button"
+                      aria-expanded={isExpanded}
+                      aria-controls={panelId}
+                      onClick={() => togglePortfolio(id)}
+                    >
+                      <span>{committee.name.toUpperCase()}</span>
+                      <span
+                        className="registration-card__indicator"
+                        aria-hidden="true"
+                      >
+                        {isExpanded ? '−' : '+'}
+                      </span>
+                    </button>
+                  </h2>
+                  <div
+                    className="registration-card__panel"
+                    id={panelId}
+                    hidden={!isExpanded}
+                  >
+                    {isExpanded && (
+                      <PortfolioMatrix
+                        portfolios={committee.portfolios}
+                        style={committee.portfolioStyle}
+                        flags={committee.portfolioFlags}
+                        images={committee.portfolioImages}
+                        headingId={`${id}-matrix-title`}
+                      />
+                    )}
+                  </div>
+                </article>
+              )
+            })}
+          </div>
         </section>
       </div>
     </main>

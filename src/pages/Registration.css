@@ -31,6 +31,25 @@
   gap: 1rem;
 }
 
+.registration-portfolios {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.registration-portfolios__title {
+  margin: 0 0 clamp(1.25rem, 3vw, 1.75rem);
+  color: var(--color-champagne-gold);
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.registration-portfolios .portfolio-matrix {
+  margin-top: 0;
+}
+
 .registration-card {
   position: relative;
   border: 1px solid color-mix(in srgb, var(--color-champagne-gold) 28%, transparent);

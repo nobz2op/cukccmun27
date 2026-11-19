@@ -11,6 +11,7 @@ type PortfolioMatrixProps = {
   style: PortfolioStyle
   flags?: Record<string, PortfolioFlag>
   images?: Record<string, string>
+  headingId?: string
 }
 
 type PortfolioTileProps = {
@@ -115,7 +116,13 @@ function PortfolioTile({
   )
 }
 
-function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixProps) {
+function PortfolioMatrix({
+  portfolios,
+  style,
+  flags,
+  images,
+  headingId = 'portfolio-matrix-title',
+}: PortfolioMatrixProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [animationKey, setAnimationKey] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
@@ -295,23 +302,19 @@ function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixPr
     updateOffset,
   ])
 
-  const centerSlide = useCallback(
-    (slide: HTMLElement) => {
-      if (style !== 'character') return
-      const viewport = viewportRef.current
-      if (!viewport) return
-      const slideCenter = slide.getBoundingClientRect().left + slide.offsetWidth / 2
-      const viewportCenter = viewport.getBoundingClientRect().left + viewport.clientWidth / 2
-      const start = offsetRef.current
-      recenterRef.current = {
-        start,
-        target: start + slideCenter - viewportCenter,
-        startedAt: null,
-      }
-      setRecenterVersion((current) => current + 1)
-    },
-    [style],
-  )
+  const centerSlide = useCallback((slide: HTMLElement) => {
+    const viewport = viewportRef.current
+    if (!viewport) return
+    const slideCenter = slide.getBoundingClientRect().left + slide.offsetWidth / 2
+    const viewportCenter = viewport.getBoundingClientRect().left + viewport.clientWidth / 2
+    const start = offsetRef.current
+    recenterRef.current = {
+      start,
+      target: start + slideCenter - viewportCenter,
+      startedAt: null,
+    }
+    setRecenterVersion((current) => current + 1)
+  }, [])
 
   const selectPortfolio = useCallback(
     (index: number, slide?: HTMLElement) => {
@@ -440,7 +443,7 @@ function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixPr
   const moveSelection = (direction: -1 | 1) => {
     const index = (selectedIndex + direction + portfolioCount) % portfolioCount
     const track = trackRef.current
-    if (track && style === 'character') {
+    if (track) {
       const candidates = Array.from(track.children)
         .map((child) => child as HTMLElement)
         .filter((child) => Number(child.dataset.portfolioIndex) === index)
@@ -473,7 +476,7 @@ function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixPr
   return (
     <section
       className={`portfolio-matrix portfolio-matrix--${style === 'flag' ? 'flags' : 'characters'}`}
-      aria-labelledby="portfolio-matrix-title"
+      aria-labelledby={headingId}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsFocused(true)}
@@ -485,7 +488,7 @@ function PortfolioMatrix({ portfolios, style, flags, images }: PortfolioMatrixPr
     >
       <header className="portfolio-matrix__header">
         <div>
-          <h2 id="portfolio-matrix-title">Portfolio Matrix</h2>
+          <h2 id={headingId}>Portfolio Matrix</h2>
           <p>
             {style === 'flag'
               ? 'Select a portfolio from the continuously moving flag strip.'
