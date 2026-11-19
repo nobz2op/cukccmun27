@@ -71,6 +71,17 @@
   outline-offset: 4px;
 }
 
+.site-footer__section .site-footer__contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.site-footer__section .site-footer__contact-item svg {
+  flex: 0 0 auto;
+  color: var(--color-gold-accent);
+}
+
 .site-footer__instagram {
   display: inline-flex;
   align-items: center;

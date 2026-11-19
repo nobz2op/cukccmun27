@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Mail, MapPin, Phone } from 'lucide-react'
 import { siteNavigation } from '../../data/navigation'
 import './SiteFooter.css'
 
@@ -9,10 +10,22 @@ function SiteFooter() {
         <section className="site-footer__section" aria-labelledby="footer-contact">
           <h2 id="footer-contact">Contact</h2>
           <address>
-            <a href="mailto:CUKCCMUN27@gmail.com">CUKCCMUN27@gmail.com</a>
-            <a href="tel:7034340055">7034340055</a>
-            <a href="tel:9447652912">9447652912</a>
-            <span>CUKCC Campus, Pattom, Marappalam, Trivandrum</span>
+            <a className="site-footer__contact-item" href="mailto:CUKCCMUN27@gmail.com">
+              <Mail size={15} aria-hidden="true" />
+              CUKCCMUN27@gmail.com
+            </a>
+            <a className="site-footer__contact-item" href="tel:7034340055">
+              <Phone size={15} aria-hidden="true" />
+              7034340055
+            </a>
+            <a className="site-footer__contact-item" href="tel:9447652912">
+              <Phone size={15} aria-hidden="true" />
+              9447652912
+            </a>
+            <span className="site-footer__contact-item">
+              <MapPin size={15} aria-hidden="true" />
+              CUKCC Campus, Pattom, Marappalam, Trivandrum
+            </span>
           </address>
         </section>
 

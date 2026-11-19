@@ -22,7 +22,7 @@ function CommitteeCard({
           <p className="committee-card__information">Agenda: {agenda}</p>
         )}
         <Link className="committee-action" to={`/committees/${slug}`}>
-          View Details
+          View Portfolio Matrix
         </Link>
       </div>
     </article>

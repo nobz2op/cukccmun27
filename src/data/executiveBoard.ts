@@ -38,12 +38,12 @@ export const executiveBoard: ExecutiveBoardCommittee[] = [
     members: [
       {
         name: 'Arjun S Nair',
-        designation: 'Supreme Commander',
+        designation: 'Chairperson',
         photo: '/images/executive-board/arjun.jpeg',
       },
       {
         name: 'Pramith C Menon',
-        designation: 'Custodian',
+        designation: 'Vice Chairperson',
         photo: '/images/executive-board/pramith.jpeg',
       },
       {
@@ -62,11 +62,12 @@ export const executiveBoard: ExecutiveBoardCommittee[] = [
         designation: 'Head of Photography',
         photo: '/images/executive-board/devak.jpeg',
       },
-      {
-        name: 'Lekshmi Sony',
-        designation: 'Head of Journalism',
-        photo: '/images/executive-board/lekshmi.jpeg',
-      },
+      // Temporarily excluded from the Executive Board listing.
+      // {
+      //   name: 'Lekshmi Sony',
+      //   designation: 'Head of Journalism',
+      //   photo: '/images/executive-board/lekshmi.jpeg',
+      // },
     ],
   },
 ]

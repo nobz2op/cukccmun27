@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import GoldDust from '../components/common/GoldDust'
 import ShimmerTitle from '../components/common/ShimmerTitle'
@@ -36,6 +37,7 @@ const countdownUnits = [
 
 function Home() {
   const homeRef = useRef<HTMLElement | null>(null)
+  const logoRef = useRef<HTMLDivElement | null>(null)
   const [countdown, setCountdown] = useState<CountdownValues>(getCountdownValues)
 
   useEffect(() => {
@@ -65,6 +67,31 @@ function Home() {
   }, [])
 
   useEffect(() => {
+    const logo = logoRef.current
+    if (!logo) return
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+    if (reduceMotion || typeof IntersectionObserver === 'undefined') {
+      logo.classList.add('is-visible')
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          logo.classList.toggle('is-visible', entry.isIntersecting)
+        })
+      },
+      { threshold: 0 },
+    )
+
+    observer.observe(logo)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
     const intervalId = window.setInterval(() => {
       setCountdown(getCountdownValues())
     }, 1000)
@@ -78,6 +105,31 @@ function Home() {
       <section className="home-hero" aria-labelledby="home-title">
         <GoldDust variant="hero" />
         <div className="home-container home-hero__content">
+          <div className="home-hero__logo" ref={logoRef}>
+            <span className="home-hero__logo-glow" aria-hidden="true" />
+            <span className="home-hero__logo-sweep" aria-hidden="true" />
+            <img src="/images/cukccmun-logo.png" alt="CUKCCMUN'27 emblem" />
+            <span
+              className="home-hero__logo-mote"
+              style={{ '--mx': '10%', '--my': '18%', '--md': '7s', '--mdl': '-2s', '--msx': '12px', '--mo': 0.85 } as CSSProperties}
+              aria-hidden="true"
+            />
+            <span
+              className="home-hero__logo-mote"
+              style={{ '--mx': '86%', '--my': '30%', '--md': '9s', '--mdl': '-5s', '--msx': '-14px', '--mo': 0.7 } as CSSProperties}
+              aria-hidden="true"
+            />
+            <span
+              className="home-hero__logo-mote"
+              style={{ '--mx': '18%', '--my': '78%', '--md': '8s', '--mdl': '-1s', '--msx': '10px', '--mo': 0.75 } as CSSProperties}
+              aria-hidden="true"
+            />
+            <span
+              className="home-hero__logo-mote"
+              style={{ '--mx': '80%', '--my': '82%', '--md': '10s', '--mdl': '-6s', '--msx': '-10px', '--mo': 0.6 } as CSSProperties}
+              aria-hidden="true"
+            />
+          </div>
           <p className="home-eyebrow home-hero__intro home-hero__intro--1">
             Central University of Kerala Capital Centre
           </p>
@@ -120,7 +172,7 @@ function Home() {
           <div className="home-hero__actions home-hero__intro home-hero__intro--8">
             <Link
               className="home-button home-button--primary home-button--register"
-              to="/registration"
+              to="/registration?form=priority-round"
             >
               Register Now
             </Link>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { registrationForms } from '../data/registration'
 import type { RegistrationForm } from '../data/registration'
 import './Registration.css'
@@ -127,9 +128,30 @@ function EmbeddedForm({ form }: { form: RegistrationForm }) {
 }
 
 function Registration() {
+  const [searchParams] = useSearchParams()
+  const requestedFormId = searchParams.get('form')
   const [expandedForms, setExpandedForms] = useState<Record<string, boolean>>(
-    {},
+    () => {
+      const initialId = searchParams.get('form')
+      return initialId &&
+        registrationForms.some((form) => form.id === initialId)
+        ? { [initialId]: true }
+        : {}
+    },
   )
+
+  useEffect(() => {
+    if (
+      !requestedFormId ||
+      !registrationForms.some((form) => form.id === requestedFormId)
+    ) {
+      return
+    }
+
+    document
+      .getElementById(`registration-card-${requestedFormId}`)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [requestedFormId])
 
   const toggleForm = (formId: string) => {
     setExpandedForms((currentForms) => ({
@@ -153,6 +175,7 @@ function Registration() {
             return (
               <article
                 className={`registration-card${isExpanded ? ' registration-card--expanded' : ''}`}
+                id={`registration-card-${form.id}`}
                 key={form.id}
               >
                 <h2 className="registration-card__heading">
