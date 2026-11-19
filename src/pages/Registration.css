@@ -52,7 +52,7 @@
 
 .registration-card {
   position: relative;
-  min-width: 0;
+  min-width: 0; /* Prevents flex/grid children from overflowing on smaller screens */  
   border: 1px solid color-mix(in srgb, var(--color-champagne-gold) 28%, transparent);
   border-radius: 0.35rem;
   background: color-mix(in srgb, var(--color-black) 38%, transparent);
